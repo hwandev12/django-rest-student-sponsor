@@ -1,4 +1,3 @@
-from pyexpat import model
 from django.contrib import admin
 from django.core.exceptions import ValidationError
 from .models import CustomUser, Student, Sponsor, SponsoredStudents
@@ -16,6 +15,5 @@ class SponsorForm(forms.ModelForm):
 class SponsorAdmin(admin.ModelAdmin):
     form = SponsorForm
 
-admin.site.register(CustomUser)
 admin.site.register(Student)
 admin.site.register(SponsoredStudents)

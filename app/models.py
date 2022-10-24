@@ -1,8 +1,11 @@
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class CustomUser(AbstractUser):
-    pass
+    is_super = models.BooleanField(default=False)
+    is_agent = models.BooleanField(default=False)
+    is_user = models.BooleanField(default=True)
 
 
 class Student(models.Model):
