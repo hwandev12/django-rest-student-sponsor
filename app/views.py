@@ -1,4 +1,6 @@
 from unicodedata import name
+
+from django.shortcuts import render
 from .models import Sponsor, Student
 from .serializers import StudentSerializer, UserSerializer, SponsorSerializer
 from rest_framework import permissions, renderers, viewsets, generics, filters
@@ -101,6 +103,11 @@ class FilterPerUserProduction(viewsets.ModelViewSet):
     def get_queryset(self):
         user = self.request.user
         return Student.objects.filter(owner=user)
+    
+
+# view home page
+def home(request):
+    return render(request, 'pages/home.html')
 
 
     

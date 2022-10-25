@@ -11,6 +11,9 @@ router.register(r'users', UserViewSet, basename='users')
 router.register(r'sponsors', SponsorViewSet, basename='sponsors')
 router.register(r'filter-user-list', FilterPerUserProduction, basename='filter')
 
+app_name = 'app'
+
 urlpatterns = [
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
+    path('', home, name='home')
 ]
