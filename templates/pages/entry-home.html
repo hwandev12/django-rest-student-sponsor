@@ -1,0 +1,32 @@
+{% extends 'layouts/base.html' %}
+{% block title %}base{% endblock title %}
+
+{% block content %}
+<style>
+    .link-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .link-wrapper a:nth-child(1) {
+        margin-right: 10px;
+    }
+</style>
+<div class="container">
+    {% if messages %}
+    <ul class="w-25 ms-auto" role="alert" style="text-align: center; position: absolute; top: 30px; right: 50px;">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }} alert alert-success "
+            style="list-style: none; display: block; margin-bottom: 10px; text-align: left;" {% endif %}>{{ message }}
+            </li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="link-wrapper">
+        <a class="btn btn-info p-5" href="#">Register</a>
+        <a class="btn btn-danger p-5" href="{% url 'authenticate:login' %}">Login</a>
+    </div>
+</div>
+{% endblock content %}

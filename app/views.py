@@ -106,7 +106,7 @@ class FilterPerUserProduction(viewsets.ModelViewSet):
 
 # view home page
 def home(request):
-    return render(request, 'pages/home.html')
+    return render(request, 'pages/entry-home.html')
 
 
     

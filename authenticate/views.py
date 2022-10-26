@@ -6,6 +6,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 
+def entry(request):
+    return render(request, 'pages/home.html')
+
 class SignUpView(CreateView):
     form_class = CustomSponsorCreation
     template_name = 'registration/signup.html'
@@ -29,20 +32,20 @@ def customStudentSignup(request):
     return render(request, 'registration/student.html', {'form': form})
 
 
-def customStudentLogin(request):
+def userLogin(request):
     if request.method == "POST":
-        first_name = request.POST['first_name']
         email = request.POST['email']
+        password = request.POST['password']
         
-        user = authenticate(request, first_name=first_name, email=email)
+        user = authenticate(request, password=password, email=email)
         
         if user is not None:
             form = login(request, user)
-            messages.success(request, f"Welcome {first_name} again!")
+            messages.success(request, f"Welcome again!")
             return redirect('/')
         else:
             messages.info(request, 'First name or Email is not matching!')
             return redirect('/')
     
     form = AuthenticationForm()
-    return render(request, 'registration/student-login.html', {"form": form})
+    return render(request, 'registration/login.html', {"form": form})

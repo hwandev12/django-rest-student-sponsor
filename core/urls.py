@@ -5,6 +5,6 @@ from authenticate.views import SignUpView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('app.urls')),
-    path('signup/', include('authenticate.urls')),
+    path('authentication/', include('authenticate.urls')),
     path('api-auth/', include('rest_framework.urls')),
 ]
