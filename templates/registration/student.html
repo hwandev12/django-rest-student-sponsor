@@ -1,0 +1,54 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}student register{% endblock title %}
+
+{% block content %}
+<style>
+    form {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 100px;
+        font-family: 'Raleway', sans-serif;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+</style>
+<div class="container">
+    <form action="" method="POST">
+        {% load widget_tweaks %}
+        {% csrf_token %}
+        <div class="form-header">
+            <h3>Sign up</h3>
+        </div>
+        <div class="form-group">
+            <!-- <label for="">Reason:</label> -->
+            {% render_field form.reason type="text" class="form-control" placeholder="Reason" %}
+        </div>
+        <div class="form-group">
+            <!-- <label for="">First name:</label> -->
+            {% render_field form.first_name type="text" class="form-control" placeholder="First Name" %}
+        </div>
+        <div class="form-group">
+            <!-- <label for="">Last Name:</label> -->
+            {% render_field form.last_name type="text" class="form-control" placeholder="Last Name" %}
+        </div>
+        <div class="form-group">
+            <!-- <label for="">First name:</label> -->
+            {% render_field form.email type="email" class="form-control" placeholder="Email" %}
+        </div>
+        <div class="form-group">
+            <!-- <label for="">Phone_number:</label> -->
+            {% render_field form.phone_number type="number" class="form-control" placeholder="Phone Number" %}
+        </div>
+        <div class="form-group">
+            <!-- <label for="">Specification:</label> -->
+            {% render_field form.specification type="text" class="form-control" %}
+        </div>
+        <button type="submit" class="btn btn-info mt-3 w-100">Create</button>
+        {{ form.errors }}
+    </form>
+</div>
+{% endblock content %}

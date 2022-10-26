@@ -53,7 +53,6 @@ class UserFilter(filter.FilterSet):
     class Meta:
         model = User
         fields = {
-            'username': ['exact', 'contains'],
             'last_login': ['exact', 'year__gt'],
         }
 

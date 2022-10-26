@@ -12,18 +12,19 @@ class SponsoredStudentsSerializer(serializers.ModelSerializer):
         fields = ['student', ]
 
 class StudentSerializer(serializers.HyperlinkedModelSerializer):
-    my_user_data = serializers.SerializerMethodField(read_only=True)
+    # my_user_data = serializers.SerializerMethodField(read_only=True)
+    owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
         model = Student
         fields = ['id', 'reason', 'first_name', 'last_name',
-                  'phone_number', 'specification', 'created', 'my_user_data']
+                  'phone_number', 'specification', 'created', 'email', 'owner']
         
-    def get_my_user_data(self, obj):
-        return {
-            "username": obj.owner.username,
-            "email": obj.owner.email
-        }
+    # def get_my_user_data(self, obj):
+    #     return {
+    #         "username": obj.owner.username,
+    #         "email": obj.owner.email
+    #     }
         
 
 class SponsorSerializer(serializers.HyperlinkedModelSerializer):
@@ -53,10 +54,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'students']
+        fields = ['id', 'email', 'students']
         
 # count number of info of website
-class TotalStudentSponsorSerializer(serializers.HyperlinkedModelSerializer):
+class TotalStudentSponsorSerializer(serializers.Serializer):
     total_student = StudentSerializer(many=True, read_only=True)
     total_sponsor = SponsorSerializer(many=True, read_only=True)
         

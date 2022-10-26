@@ -1,12 +1,7 @@
 from django.contrib import admin
-from django.contrib.auth import get_user_model
-from authenticate.forms import CustomUserChangeForm, CustomUserCreationForm
+from django.contrib.auth.models import Group
+from .forms import UserAdmin
+from app.models import CustomUser
 
-User = get_user_model()
-
-class CustomUserAdmin(admin.ModelAdmin):
-    add_form = CustomUserCreationForm
-    form = CustomUserChangeForm
-    list_display = ['username', 'email', 'is_super', 'is_user', 'is_agent']
-
-admin.site.register(User, CustomUserAdmin)
+admin.site.register(CustomUser, UserAdmin)
+admin.site.unregister(Group)

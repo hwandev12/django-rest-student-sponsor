@@ -18,8 +18,12 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
-# Application definition
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
+# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -34,7 +38,9 @@ INSTALLED_APPS = [
     'django_filters',
 
     'django_limits',
-    'authenticate'
+    'authenticate',
+    'widget_tweaks',
+    'allauth',
 ]
 
 MIDDLEWARE = [
@@ -137,6 +143,7 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+LOGIN_REDIRECT_URL = '/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
