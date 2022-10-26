@@ -1,5 +1,66 @@
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Create</button>
-</form>
+{% extends 'layouts/base.html' %}
+
+{% block title %}student register{% endblock title %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+<div class="container" style="text-align: center; padding-top: 50px;">
+    <h1 style="text-align: center; font-size: 22px;">You are authenticated. Please go to this url:</h1>
+    <a style="text-align: center; display: inline-block;" class="btn btn-info mt-4" href="/">Home</a>
+</div>
+{% endif %}
+{% if not request.user.is_authenticated %}
+<style>
+    form {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 100px;
+        font-family: 'Raleway', sans-serif;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+</style>
+<div class="container">
+    <form action="" method="POST">
+        {% load widget_tweaks %}
+        {% csrf_token %}
+        <div class="form-header" style="text-align: center;">
+            <h3>Sign up</h3>
+        </div>
+        <div class="form-group">
+            <!-- <label for="">Reason:</label> -->
+            {% render_field form.email type="email" class="form-control" placeholder="Email" %}
+        </div>
+        <div class="form-group">
+            <!-- <label for="">First name:</label> -->
+            {% render_field form.date_of_birth class="form-control" %}
+        </div>
+        <div class="form-group">
+            <!-- <label for="">Last Name:</label> -->
+            {% render_field form.full_name type="text" class="form-control" placeholder="full_name" %}
+        </div>
+        <div class="form-group">
+            <!-- <label for="">First name:</label> -->
+            {% render_field form.city type="text" class="form-control" placeholder="City" %}
+        </div>
+        <div class="form-group">
+            <!-- <label for="">Phone_number:</label> -->
+            {% render_field form.address type="text" class="form-control" placeholder="Address" %}
+        </div>
+        <div class="form-group">
+            <!-- <label for="">Phone_number:</label> -->
+            {% render_field form.password1 type="password" class="form-control" placeholder="Password" %}
+        </div>
+        <div class="form-group">
+            <!-- <label for="">Phone_number:</label> -->
+            {% render_field form.password2 type="password" class="form-control" placeholder="Confirm Password" %}
+        </div>
+        <button type="submit" class="btn btn-info mt-3 w-100">Create</button>
+        {{ form.errors }}
+    </form>
+</div>
+{% endif %}
+{% endblock content %}

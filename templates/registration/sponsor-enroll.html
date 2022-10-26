@@ -1,6 +1,6 @@
 {% extends 'layouts/base.html' %}
 
-{% block title %}student register{% endblock title %}
+{% block title %}sponsor enroll{% endblock title %}
 
 {% block content %}
 <style>
@@ -25,27 +25,23 @@
         </div>
         <div class="form-group">
             <!-- <label for="">Reason:</label> -->
-            {% render_field form.reason type="text" class="form-control" placeholder="Reason" %}
-        </div>
-        <div class="form-group">
-            <!-- <label for="">First name:</label> -->
             {% render_field form.first_name type="text" class="form-control" placeholder="First Name" %}
         </div>
         <div class="form-group">
-            <!-- <label for="">Last Name:</label> -->
+            <!-- <label for="">First name:</label> -->
             {% render_field form.last_name type="text" class="form-control" placeholder="Last Name" %}
         </div>
         <div class="form-group">
+            <!-- <label for="">Last Name:</label> -->
+            {% render_field form.age type="number" class="form-control" placeholder="Age" %}
+        </div>
+        <div class="form-group">
             <!-- <label for="">First name:</label> -->
-            {% render_field form.email type="email" class="form-control" placeholder="Email" %}
+            {% render_field form.work_degree type="text" class="form-control" placeholder="Work Degree" %}
         </div>
         <div class="form-group">
             <!-- <label for="">Phone_number:</label> -->
-            {% render_field form.phone_number type="number" class="form-control" placeholder="Phone Number" %}
-        </div>
-        <div class="form-group">
-            <!-- <label for="">Specification:</label> -->
-            {% render_field form.specification type="text" class="form-control" %}
+            {% render_field form.students type="text" class="form-control" %}
         </div>
         <button type="submit" class="btn btn-info mt-3 w-100">Create</button>
         {{ form.errors }}

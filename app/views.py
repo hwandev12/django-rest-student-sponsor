@@ -10,6 +10,7 @@ from rest_framework.reverse import reverse
 from .permissions import IsOwnerOrReadOnly
 from django.contrib.auth import get_user_model
 from rest_framework.pagination import PageNumberPagination
+from django.contrib.auth.decorators import login_required
 
 from django.db.models import Count
 
@@ -80,8 +81,8 @@ class StudentViewSet(viewsets.ModelViewSet):
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    # filterset_fields = ['username', 'email'] # default filter view
-    filterset_class = UserFilter    
+    filterset_fields = ['full_name', 'email'] # default filter view
+    # filterset_class = UserFilter    
     pagination_class = SmallResultsSetPagination
         
 
@@ -105,6 +106,7 @@ class FilterPerUserProduction(viewsets.ModelViewSet):
     
 
 # view home page
+# @login_required(login_url='authentication/login/')
 def home(request):
     return render(request, 'pages/entry-home.html')
 

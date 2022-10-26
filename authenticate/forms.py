@@ -7,12 +7,18 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 User = get_user_model()
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
 class CustomUserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
     class Meta:
         model = CustomUser
-        fields = ('email', 'date_of_birth', 'full_name', 'city', 'address')
+        fields = ['email', 'date_of_birth', 'full_name', 'city', 'address']
+        widgets = {
+            'date_of_birth': DateInput()
+        }
         
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')

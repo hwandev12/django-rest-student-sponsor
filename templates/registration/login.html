@@ -23,8 +23,22 @@
     .form-group {
         margin-bottom: 10px;
     }
+    .fa-exclamation {
+        margin-right: 10px;
+    }
 </style>
 <div class="container">
+    {% if messages %}
+        <ul class="ms-auto" role="alert" style="text-align: center; position: absolute; top: 30px; right: 50px; width: 450px;">
+            {% for message in messages %}
+                {% if 'aut-warning' in message.tags %}
+                    <li class="alert alert-warning" style="list-style: none; display: block; margin-bottom: 10px; text-align: left;">
+                        <i class="fa-solid fa-exclamation"></i> {{ message }}
+                    </li>
+        </ul>
+                {% endif %}
+            {% endfor %}
+    {% endif %}
     <form action="" method="POST">
         {% load widget_tweaks %}
         {% csrf_token %}

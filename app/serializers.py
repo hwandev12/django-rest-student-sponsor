@@ -49,12 +49,12 @@ class SponsorSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    students = serializers.HyperlinkedRelatedField(
+    student = serializers.HyperlinkedRelatedField(
         many=True, view_name='student-detail', read_only=True)
 
     class Meta:
         model = User
-        fields = ['id', 'email', 'students']
+        fields = ['id', 'email', 'date_of_birth', 'full_name', 'city', 'address', 'student']
         
 # count number of info of website
 class TotalStudentSponsorSerializer(serializers.Serializer):
