@@ -70,8 +70,8 @@ class StudentViewSet(viewsets.ModelViewSet):
     # filter_backends = [filters.SearchFilter]
     # search_fields = ['first_name', 'last_name', 'specification']
     filterset_class = StudentFilter
-    pagination_class = SmallResultsSetPagination
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    pagination_class = SmallResultsSetPagination    
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly, permissions.IsAdminUser]
     
 
     def perform_create(self, serializer):
@@ -84,6 +84,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     filterset_fields = ['full_name', 'email'] # default filter view
     # filterset_class = UserFilter    
     pagination_class = SmallResultsSetPagination
+    permission_classes = [permissions.IsAdminUser, IsOwnerOrReadOnly]
         
 
 class SponsorViewSet(viewsets.ModelViewSet):
@@ -93,12 +94,13 @@ class SponsorViewSet(viewsets.ModelViewSet):
     # search_fields = ['first_name', 'students__first_name'] # this is for nested manytomany fields search filter
     filterset_class = SponsorFilter
     pagination_class = SmallResultsSetPagination
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAdminUser, IsOwnerOrReadOnly]
 
 
 class FilterPerUserProduction(viewsets.ModelViewSet):
     serializer_class = StudentSerializer
     pagination_class = SmallResultsSetPagination
+    permission_classes = [permissions.IsAdminUser, IsOwnerOrReadOnly]
 
     def get_queryset(self):
         user = self.request.user

@@ -12,25 +12,23 @@ class SponsoredStudentsSerializer(serializers.ModelSerializer):
         fields = ['student', ]
 
 class StudentSerializer(serializers.HyperlinkedModelSerializer):
-    # my_user_data = serializers.SerializerMethodField(read_only=True)
-    owner = serializers.ReadOnlyField(source='owner.username')
+    my_user_data = serializers.SerializerMethodField(read_only=True)
+    # owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
         model = Student
         fields = ['id', 'reason', 'first_name', 'last_name',
-                  'phone_number', 'specification', 'created', 'email', 'owner']
+                  'phone_number', 'specification', 'created', 'email', 'my_user_data']
         
-    # def get_my_user_data(self, obj):
-    #     return {
-    #         "username": obj.owner.username,
-    #         "email": obj.owner.email
-    #     }
+    def get_my_user_data(self, obj):
+        return {
+            "username": obj.owner.full_name,
+            "email": obj.owner.email
+        }
         
 
 class SponsorSerializer(serializers.HyperlinkedModelSerializer):
-    students = serializers.HyperlinkedRelatedField(
-        many=True, view_name='student-detail', read_only=True)
-    
+    student = serializers.HyperlinkedIdentityField(view_name='app:student-detail')
     sponsored_students = SponsoredStudentsSerializer(many=True, required=False)
     
     def create(self, validated_data):
@@ -44,17 +42,16 @@ class SponsorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Sponsor
         fields = ['id', 'first_name', 'last_name',
-                  'age', 'work_degree', 'students', 'sponsored_students']
+                  'age', 'work_degree', 'student', 'sponsored_students']
 
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    student = serializers.HyperlinkedRelatedField(
-        many=True, view_name='student-detail', read_only=True)
+class UserSerializer(serializers.ModelSerializer):
+    students = serializers.HyperlinkedIdentityField(view_name='app:student-detail')
 
     class Meta:
         model = User
-        fields = ['id', 'email', 'date_of_birth', 'full_name', 'city', 'address', 'student']
+        fields = ['id', 'email', 'is_admin', 'is_staff', 'date_of_birth', 'full_name', 'city', 'address', 'students']
         
 # count number of info of website
 class TotalStudentSponsorSerializer(serializers.Serializer):

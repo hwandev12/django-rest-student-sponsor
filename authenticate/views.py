@@ -28,8 +28,11 @@ def userSignup(request):
     return render(request, 'registration/signup.html', {'form': form})
 
 
-@login_required(login_url='/authentication/login/')
+# @login_required(login_url='/authentication/login/')
 def customStudentEnroll(request):
+    if not request.user.is_authenticated:
+        messages.warning(request, "Please login or register to continue!", extra_tags='aut-warning')
+        return redirect('/authentication/login/')
     if request.method == 'POST':
         form = CustomStudentCreation(request.POST)
         if form.is_valid():
@@ -56,7 +59,8 @@ def userLogin(request):
 
         if user is not None:
             form = login(request, user)
-            messages.success(request, f"Welcome again!", extra_tags='login')
+            full_name = user.full_name
+            messages.success(request, f"Welcome {full_name} again!", extra_tags='login')
             return redirect('/')
         else:
             messages.info(request, 'First name or Email is not matching!')

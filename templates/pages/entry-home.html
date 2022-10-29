@@ -3,6 +3,11 @@
 
 {% block content %}
 <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
     .link-wrapper {
         display: flex;
         justify-content: center;
@@ -10,11 +15,16 @@
         height: 100vh;
     }
 
+    .wrapper-inner {
+        border: 1.5px solid #777;
+        padding: 90px 50px;
+    }
+
     .link-wrapper a:nth-child(1) {
-        margin-right: 10px;
+        margin-right: 12px;
     }
     .link-wrapper a:nth-child(2) {
-        margin-right: 10px;
+        margin-right: 12px;
     }
     .fa-circle-check {
         margin-right: 10px;
@@ -23,6 +33,9 @@
         margin-right: 10px;
     }
     .fa-arrow-right-to-bracket {
+        margin-right: 10px;
+    }
+    .fa-user {
         margin-right: 10px;
     }
 </style>
@@ -54,15 +67,17 @@
     </ul>
     {% endif %}
     <div class="link-wrapper">
-        {% if not request.user.is_authenticated %}
-            <a class="btn btn-info p-4" href="{% url 'authenticate:signup' %}">Register</a>
-        {% endif %}
-        {% if not request.user.is_authenticated %}
-            <a class="btn btn-danger p-4" href="{% url 'authenticate:login' %}">Login</a>
-        {% endif %}
-        {% if request.user.is_authenticated %}
+        <div class="wrapper-inner">
+            {% if request.user.is_authenticated %}
+            <h1 class="btn btn-info d-block my-3"><i class="fa-regular fa-user"></i> Account is log as {{ request.user.full_name }}</h1>
             <a class="btn btn-warning p-4" href="{% url 'authenticate:logout' %}">Logout</a>
-        {% endif %}
+            {% endif %}
+            {% if not request.user.is_authenticated %}
+            <a class="btn btn-info p-4" href="{% url 'authenticate:signup' %}">Register</a>
+            <a class="btn btn-danger p-4" href="{% url 'authenticate:login' %}">Login</a>
+            {% endif %}
+            <a class="btn btn-warning p-4" href="{% url 'authenticate:home' %}">Authentication</a>
+        </div>
     </div>
 </div>
 {% endblock content %}
