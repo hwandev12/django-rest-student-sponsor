@@ -1,0 +1,32 @@
+{% extends 'layouts/base.html' %}
+{% block title %}logging out{% endblock title %}
+
+{% block content %}
+<style>
+    .wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: 'Raleway', sans-serif;
+    }
+    .logout-wrapper {
+        width: 600px;
+        text-align: center;
+        border: 1.5px solid #666;
+        padding: 30px 70px;
+    }
+    .logout-wrapper p {
+        height: 300px;
+        overflow-y: scroll;
+        text-align: left !important;
+    }
+</style>
+<div class="container wrap">
+    <div class="logout-wrapper">
+        <h5>You are logging out. Please read below to continue and apply any cookies</h5>
+        <p class="my-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati veniam impedit tempore cupiditate explicabo! Qui eaque soluta laboriosam unde eos minima maxime necessitatibus deserunt libero voluptas id vero beatae rerum sapiente fugiat a repellendus similique temporibus ipsa deleniti sed, natus possimus quaerat. Maxime doloremque modi tempora distinctio deserunt itaque ipsum ab cupiditate unde voluptatibus possimus minus amet odit, dolores eius! Illo, distinctio odio laborum soluta rerum non sed voluptas magni excepturi natus sapiente similique dolores. <br> <br> Vero, repellat nisi? Hic magni labore ex cupiditate, quis sapiente saepe tenetur repellendus vitae alias deserunt quam! Quibusdam, cumque impedit eos corporis deleniti nam! Quod unde modi repellat quibusdam, repellendus distinctio cupiditate, nostrum deserunt at earum, dolor necessitatibus maiores magni molestiae vero porro voluptate delectus suscipit nobis quas sequi nesciunt animi sunt enim! Sequi harum iste aliquid adipisci distinctio enim, repudiandae porro in dolorem quo asperiores. Dolorum iusto necessitatibus nobis nisi possimus dicta, minus laborum.</p>
+        <a class="btn btn-danger" href="{% url 'authenticate:logout' %}">Accept and Continue</a>
+    </div>
+</div>
+{% endblock content %}

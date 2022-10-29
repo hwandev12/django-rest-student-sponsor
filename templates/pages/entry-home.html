@@ -70,13 +70,13 @@
         <div class="wrapper-inner">
             {% if request.user.is_authenticated %}
             <h1 class="btn btn-info d-block my-3"><i class="fa-regular fa-user"></i> Account is log as {{ request.user.full_name }}</h1>
-            <a class="btn btn-warning p-4" href="{% url 'authenticate:logout' %}">Logout</a>
+            <a class="btn btn-warning p-4" href="{% url 'authenticate:logout-sam' %}">Logout</a>
+            <a class="btn btn-warning p-4" href="{% url 'authenticate:home' %}">Authentication</a>
             {% endif %}
             {% if not request.user.is_authenticated %}
             <a class="btn btn-info p-4" href="{% url 'authenticate:signup' %}">Register</a>
             <a class="btn btn-danger p-4" href="{% url 'authenticate:login' %}">Login</a>
             {% endif %}
-            <a class="btn btn-warning p-4" href="{% url 'authenticate:home' %}">Authentication</a>
         </div>
     </div>
 </div>

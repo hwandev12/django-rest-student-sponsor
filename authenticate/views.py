@@ -10,6 +10,8 @@ from django.conf import settings
 
 
 def entry(request):
+    if not request.user.is_authenticated:
+        return render(request, 'pages/404.html')
     return render(request, 'pages/authentication.html')
 
 
@@ -73,6 +75,9 @@ def logout_view(request):
     logout(request)
     messages.warning(request, f"You are logged out!", extra_tags='logout')
     return redirect('/')
+
+def logout_sample(request):
+    return render(request, 'pages/logout.html')
 
 # customSponsorCreation
 # @login_required(login_url='/authentication/login/')
